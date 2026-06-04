@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+
+    <style>
+        #imagebox{
+            width: 250px;
+            height: 200px;
+            position: relative;
+            left: 25%;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+
+        #imagebox img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        button{
+            margin-top: 20px;
+            position: relative;
+            left: 25%;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #count{
+            position: relative;
+            left: 25%;
+            font-size: 20px;
+        }
+
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="imagebox">
+        <img src="https://img.freepik.com/free-photo/beautiful-shot-natural-scenery-autumn_181624-25934.jpg" alt="">
+
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/016/940/106/small/beautiful-moonlight-scenery-background-free-scenery-illustration-moonlight-scenery-with-stars-on-the-night-sky-beautiful-midnight-background-free-vector.jpg" alt="">
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTHW2eFHG4Ex51JTVzuEjeyspKtJDf-qnBYw&s" alt="">
+    </div>
+
+    <p id="count"></p>
+
+    <button onclick="onSlide(-1)">Previous</button>
+    <button onclick="onSlide(1)">Next</button>
+
+    <script>
+
+        const count = document.querySelector("#count")
+        const show_btn= document.querySelector("#next")
+        const images = document.querySelectorAll("#imagebox img")
+
+        let currentindex = 0;
+
+        showslide()
+
+        function showslide() {
+
+            for(let i = 0; i < images.length; i++){
+                images[i].classList.add("hide")
+            }
+
+            images[currentindex].classList.remove("hide")
+
+            count.textContent = `${currentindex + 1}/${images.length}`
+        }
+
+        function onSlide(direction){
+
+            currentindex = currentindex + direction
+
+            if(currentindex >= images.length){
+                currentindex = 0
+            }
+
+            else if(currentindex < 0){
+                currentindex = images.length - 1
+            }
+
+            showslide()
+        }
+
+    </script>
+
+</body>
+</html>
